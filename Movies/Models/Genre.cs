@@ -5,15 +5,11 @@ using System.Threading.Tasks;
 
 namespace Movies.Models
 {
-    public class Movie
+    public class Genre
     {
         public int Id { get; set; }
-        public string Title { get; set; }
-        public int Year { get; set; }
-        public MovieDetails Details { get; set; }
-        public ICollection<MovieComment> Comments { get; set; }
+        public string NumeGen { get; set; }
         public ICollection<MovieGenre> MovieGenres { get; set; }
-
 
     }
 }
