@@ -50,19 +50,21 @@ namespace Movies.Data
             builder.Entity<ApplicationUser>().HasData(new ApplicationUser
             {
                 Id = "101ab9b6-2b6e-494f-a72a-7ece0c979173",
-                UserName = "admin",
-                NormalizedUserName = "admin".ToUpper(),
+                UserName = "admin@admin.admin",
+                NormalizedUserName = "admin@admin.admin".ToUpper(),
                 Email = "admin@admin.admin",
                 NormalizedEmail = "admin@admin.admin".ToUpper(),
-                PasswordHash = hasher.HashPassword(null, "parola")
+                EmailConfirmed = true,
+                PasswordHash = "AQAAAAEAACcQAAAAEMIHZtOtIVmf4/lMinqAuMplBbHiSYNIdRzIBgGLsGcOm8bTtKu0OgH4iCoYg5z8Rw==" // Parola123$
             }, new ApplicationUser
             {
                 Id = "69c272d3-1de9-4ca6-9c4d-61559167aa03",
-                UserName = "user",
-                NormalizedUserName = "user".ToUpper(),
+                UserName = "user@user.user",
+                NormalizedUserName = "user@user.user".ToUpper(),
                 Email = "user@user.user",
                 NormalizedEmail = "user@user.user".ToUpper(),
-                PasswordHash = hasher.HashPassword(null, "parola")
+                EmailConfirmed = true,
+                PasswordHash = hasher.HashPassword(null, "Parola123$")
             });
 
             builder.Entity<IdentityUserRole<string>>().HasData(

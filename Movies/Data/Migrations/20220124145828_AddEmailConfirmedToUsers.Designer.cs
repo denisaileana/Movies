@@ -3,15 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Movies.Data;
 
 namespace Movies.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20220124145828_AddEmailConfirmedToUsers")]
+    partial class AddEmailConfirmedToUsers
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -152,14 +154,14 @@ namespace Movies.Data.Migrations
                         new
                         {
                             Id = "3747e4d8-78dc-4f55-8b38-ab5deea866fb",
-                            ConcurrencyStamp = "b484d7c0-ca25-4227-a66b-0fd5b788097c",
+                            ConcurrencyStamp = "e7fee9b1-2d8e-409e-a057-9e6720dc9f9b",
                             Name = "Administrator",
                             NormalizedName = "ADMINISTRATOR"
                         },
                         new
                         {
                             Id = "1ad6ef77-73fe-492f-bb24-ef5827eb7c8c",
-                            ConcurrencyStamp = "460b1377-c391-4745-a103-c602d8e8b278",
+                            ConcurrencyStamp = "edfaf507-13e7-4350-ba7c-6007b24a8296",
                             Name = "User",
                             NormalizedName = "USER"
                         });
@@ -359,33 +361,33 @@ namespace Movies.Data.Migrations
                         {
                             Id = "101ab9b6-2b6e-494f-a72a-7ece0c979173",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "22d38046-d974-4dcc-a69d-b496a8414349",
+                            ConcurrencyStamp = "1de09893-fbbc-43db-b859-f24c5961e444",
                             Email = "admin@admin.admin",
                             EmailConfirmed = true,
                             LockoutEnabled = false,
                             NormalizedEmail = "ADMIN@ADMIN.ADMIN",
-                            NormalizedUserName = "ADMIN@ADMIN.ADMIN",
-                            PasswordHash = "AQAAAAEAACcQAAAAEMIHZtOtIVmf4/lMinqAuMplBbHiSYNIdRzIBgGLsGcOm8bTtKu0OgH4iCoYg5z8Rw==",
+                            NormalizedUserName = "ADMIN",
+                            PasswordHash = "AQAAAAEAACcQAAAAEJIsOx9905wblFlXRhGBhePbHueMEGPST88ktAk+6TMMrlr8R3IBfgKawtlDoNLOaw==",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "1f89816a-fd1d-4b53-83d2-1728dd206d57",
+                            SecurityStamp = "178c1724-e012-401a-bdbc-941b2d2ef858",
                             TwoFactorEnabled = false,
-                            UserName = "admin@admin.admin"
+                            UserName = "admin"
                         },
                         new
                         {
                             Id = "69c272d3-1de9-4ca6-9c4d-61559167aa03",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "5f64a249-c14b-44bb-997f-f2e7ad44fcb7",
+                            ConcurrencyStamp = "0329a6d1-9f16-4180-9e7f-b9c303fae5a9",
                             Email = "user@user.user",
                             EmailConfirmed = true,
                             LockoutEnabled = false,
                             NormalizedEmail = "USER@USER.USER",
-                            NormalizedUserName = "USER@USER.USER",
-                            PasswordHash = "AQAAAAEAACcQAAAAEAjVkzb9W4HEmgTsG5nAZTenHGCYkG79YPpidwLG3mGYEHDUGf3eau5Ze+lo52mU4w==",
+                            NormalizedUserName = "USER",
+                            PasswordHash = "AQAAAAEAACcQAAAAEHK2rpG0ia6YE5pLNVJOapbuMATGELWhrpVRKuJkxZ+FxJKVdyO+FHGLsBPXrsmo/Q==",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "3beba814-496e-4580-ab6c-7de57717e3af",
+                            SecurityStamp = "6b219172-2fb5-41de-a113-6c33f8e6a9b9",
                             TwoFactorEnabled = false,
-                            UserName = "user@user.user"
+                            UserName = "user"
                         });
                 });
 
