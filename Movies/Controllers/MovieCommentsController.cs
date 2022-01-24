@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Movies.DAL;
 using Movies.Data;
 using Movies.Models;
 using System;
@@ -13,49 +14,46 @@ namespace Movies.Controllers
     [ApiController]
     public class MovieCommentsController : ControllerBase
     {
-        private readonly ApplicationDbContext _dbContext;
-
-        public MovieCommentsController(ApplicationDbContext dbContext)
+        private readonly UnitOfWork _unitOfWork;
+     
+        public MovieCommentsController(UnitOfWork unitOfWork)
         {
-            _dbContext = dbContext;
+            _unitOfWork = unitOfWork;
         }
 
         [HttpGet]
-        public IQueryable<MovieComment> GetMovieComments() 
+        public IEnumerable<MovieComment> GetMovieComments() 
         { 
-            return _dbContext.MovieComments; 
+            return _unitOfWork.MovieCommentRepository.GetMovieComments(); 
         }
 
         [HttpGet("{id}")]
         public MovieComment GetMovieComments(int id) 
         {
-            return _dbContext.MovieComments.Find(id);
+            return _unitOfWork.MovieCommentRepository.GetMovieCommentById(id);
         }
 
         [HttpPost]
         public IActionResult Create(MovieComment movieComment)
         {
-            _dbContext.MovieComments.Add(movieComment);
-            _dbContext.SaveChanges();
+            _unitOfWork.MovieCommentRepository.InsertMovieComment(movieComment);
+            _unitOfWork.Save();
             return Accepted();
         }
 
         [HttpPut("{id}")]
         public IActionResult Update(int id, MovieComment movieComment)
         {
-            var originalMovieComment = _dbContext.MovieComments.Find(id);
-            originalMovieComment.NumePersoana = movieComment.NumePersoana;
-            originalMovieComment.Comentariu = movieComment.Comentariu;
-            _dbContext.SaveChanges();
+            _unitOfWork.MovieCommentRepository.UpdateMovieComment(movieComment);
+            _unitOfWork.Save();
             return Accepted();
         }
 
         [HttpDelete("{id}")]
         public IActionResult Delete(int id)
         {
-            var originalMovieComment = _dbContext.MovieComments.Find(id);
-            _dbContext.MovieComments.Remove(originalMovieComment);
-            _dbContext.SaveChanges();
+            _unitOfWork.MovieCommentRepository.DeleteMovieComment(id);
+            _unitOfWork.Save();
             return Accepted();
         }
     }

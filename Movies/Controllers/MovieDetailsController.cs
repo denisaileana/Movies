@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Movies.DAL;
 using Movies.Data;
 using Movies.Models;
 using System;
@@ -13,48 +14,46 @@ namespace Movies.Controllers
     [ApiController]
     public class MovieDetailsController : ControllerBase
     {
-        private readonly ApplicationDbContext _dbContext;
+        private readonly UnitOfWork _unitOfWork;
 
-        public MovieDetailsController(ApplicationDbContext dbContext)
+        public MovieDetailsController(UnitOfWork unitOfWork)
         {
-            _dbContext = dbContext;
+            _unitOfWork = unitOfWork;
         }
 
         [HttpGet]
-        public IQueryable<MovieDetails> GetMovieDetails() 
+        public IEnumerable<MovieDetails> GetMovieDetails()
         { 
-            return _dbContext.MovieDetails; 
+            return _unitOfWork.MovieDetailsRepository.GetMovieDetails(); 
         }
 
         [HttpGet("{id}")]
         public MovieDetails GetMovieDetails(int id) 
         {
-            return _dbContext.MovieDetails.Find(id);
+            return _unitOfWork.MovieDetailsRepository.GetMovieDetailsById(id);
         }
 
         [HttpPost]
         public IActionResult Create(MovieDetails movieDetails)
         {
-            _dbContext.MovieDetails.Add(movieDetails);
-            _dbContext.SaveChanges();
+            _unitOfWork.MovieDetailsRepository.InsertMovieDetails(movieDetails);
+            _unitOfWork.Save();
             return Accepted();
         }
 
         [HttpPut("{id}")]
         public IActionResult Update(int id, MovieDetails movieDetails)
         {
-            var originalMovieDetails = _dbContext.MovieDetails.Find(id);
-            originalMovieDetails.Description = movieDetails.Description;
-            _dbContext.SaveChanges();
+            _unitOfWork.MovieDetailsRepository.UpdateMovieDetails(movieDetails);
+            _unitOfWork.Save();
             return Accepted();
         }
 
         [HttpDelete("{id}")]
         public IActionResult Delete(int id)
         {
-            var originalMovieDetailst = _dbContext.MovieDetails.Find(id);
-            _dbContext.MovieDetails.Remove(originalMovieDetailst);
-            _dbContext.SaveChanges();
+            _unitOfWork.MovieDetailsRepository.DeleteMovieDetails(id);
+            _unitOfWork.Save();
             return Accepted();
         }
     }

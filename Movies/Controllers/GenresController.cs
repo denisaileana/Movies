@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Movies.DAL;
 using Movies.Data;
 using Movies.Models;
 using System;
@@ -13,48 +14,46 @@ namespace Movies.Controllers
     [ApiController]
     public class GenresController : ControllerBase
     {
-        private readonly ApplicationDbContext _dbContext;
+        private readonly UnitOfWork _unitOfWork;
 
-        public GenresController(ApplicationDbContext dbContext)
+        public GenresController(UnitOfWork unitOfWork)
         {
-            _dbContext = dbContext;
+            _unitOfWork = unitOfWork;
         }
 
         [HttpGet]
-        public IQueryable<Genre> GetGenres() 
+        public IEnumerable<Genre> GetGenres() 
         { 
-            return _dbContext.Genres; 
+            return _unitOfWork.GenreRepository.GetGenres(); 
         }
 
         [HttpGet("{id}")]
         public Genre GetGenres(int id) 
         {
-            return _dbContext.Genres.Find(id);
+            return _unitOfWork.GenreRepository.GetGenreById(id);
         }
 
         [HttpPost]
         public IActionResult Create(Genre genre)
         {
-            _dbContext.Genres.Add(genre);
-            _dbContext.SaveChanges();
+            _unitOfWork.GenreRepository.InsertGenre(genre);
+            _unitOfWork.Save();
             return Accepted();
         }
 
         [HttpPut("{id}")]
         public IActionResult Update(int id, Genre genre)
         {
-            var originalGenre = _dbContext.Genres.Find(id);
-            originalGenre.NumeGen = genre.NumeGen;
-            _dbContext.SaveChanges();
+            _unitOfWork.GenreRepository.UpdateGenre(genre);
+            _unitOfWork.Save();
             return Accepted();
         }
 
         [HttpDelete("{id}")]
         public IActionResult Delete(int id)
         {
-            var originalGenre = _dbContext.Genres.Find(id);
-            _dbContext.Genres.Remove(originalGenre);
-            _dbContext.SaveChanges();
+            _unitOfWork.GenreRepository.DeleteGenre(id);
+            _unitOfWork.Save();
             return Accepted();
         }
     }

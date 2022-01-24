@@ -9,6 +9,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using Movies.DAL;
 using Movies.Data;
 using Movies.Models;
 
@@ -37,6 +38,14 @@ namespace Movies
 
             services.AddIdentityServer()
                 .AddApiAuthorization<ApplicationUser, ApplicationDbContext>();
+
+
+            services.AddScoped<IGenreRepository, GenreRepository>();
+            services.AddScoped<IMovieRepository, MovieRepository>();
+            services.AddScoped<IMovieCommentRepository, MovieCommentRepository>();
+            services.AddScoped<IMovieDetailsRepository, MovieDetailsRepository>();
+            services.AddScoped<UnitOfWork>();
+
 
             services.AddAuthentication()
                 .AddIdentityServerJwt();

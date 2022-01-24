@@ -13,7 +13,5 @@ namespace Movies.Models
         public MovieDetails Details { get; set; }
         public ICollection<MovieComment> Comments { get; set; }
         public ICollection<MovieGenre> MovieGenres { get; set; }
-
-
     }
 }
