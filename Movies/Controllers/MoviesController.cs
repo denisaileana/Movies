@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Movies.DAL;
 using Movies.Data;
@@ -12,6 +13,7 @@ namespace Movies.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
+    [Authorize(Policy = "User")]
     public class MoviesController : ControllerBase
     {
         private readonly UnitOfWork _unitOfWork;

@@ -47,6 +47,13 @@ namespace Movies
             services.AddScoped<UnitOfWork>();
 
 
+            services.AddAuthorization(options => 
+            {
+                options.AddPolicy("Administrator", p => p.RequireRole("Administrator"));
+                options.AddPolicy("User", p => p.RequireRole("User"));
+            });
+
+
             services.AddAuthentication()
                 .AddIdentityServerJwt();
             services.AddControllersWithViews();
