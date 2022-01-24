@@ -13,6 +13,7 @@ import { ApiAuthorizationModule } from 'src/api-authorization/api-authorization.
 import { AuthorizeGuard } from 'src/api-authorization/authorize.guard';
 import { AuthorizeInterceptor } from 'src/api-authorization/authorize.interceptor';
 import {EsteAdministratorGuard} from './este-administrator.guard';
+import {RetryInterceptor} from './retry.interceptor';
 
 @NgModule({
   declarations: [
@@ -45,7 +46,8 @@ import {EsteAdministratorGuard} from './este-administrator.guard';
     ])
   ],
   providers: [
-    { provide: HTTP_INTERCEPTORS, useClass: AuthorizeInterceptor, multi: true }
+    { provide: HTTP_INTERCEPTORS, useClass: AuthorizeInterceptor, multi: true },
+    { provide: HTTP_INTERCEPTORS, useClass: RetryInterceptor, multi: true }
   ],
   bootstrap: [AppComponent]
 })
