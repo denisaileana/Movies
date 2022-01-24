@@ -13,7 +13,7 @@ namespace Movies.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    [Authorize(Policy = "User")]
+    [Authorize(Policy = "Administrator")]
     public class GenresController : ControllerBase
     {
         private readonly UnitOfWork _unitOfWork;

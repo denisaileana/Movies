@@ -12,6 +12,7 @@ import { HomeComponent } from './home/home.component';
 import { ApiAuthorizationModule } from 'src/api-authorization/api-authorization.module';
 import { AuthorizeGuard } from 'src/api-authorization/authorize.guard';
 import { AuthorizeInterceptor } from 'src/api-authorization/authorize.interceptor';
+import {EsteAdministratorGuard} from './este-administrator.guard';
 
 @NgModule({
   declarations: [
@@ -32,6 +33,12 @@ import { AuthorizeInterceptor } from 'src/api-authorization/authorize.intercepto
         path: 'filme',
         loadChildren: () => import('./filme/filme.module').then(m => m.FilmeModule),
         canActivate: [AuthorizeGuard]
+      },
+      {
+        path: 'genuri',
+        loadChildren: () => import('./genuri/genuri.module').then(m => m.GenuriModule),
+        canActivate: [AuthorizeGuard],
+        canLoad: [EsteAdministratorGuard]
       },
       // { path: 'counter', component: CounterComponent },
       // { path: 'fetch-data', component: FetchDataComponent, canActivate: [AuthorizeGuard] },
