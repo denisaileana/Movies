@@ -12,6 +12,7 @@ namespace Movies.Models
         public int Year { get; set; }
         public string Genre { get; set; }
         public MovieDetails Details { get; set; }
+        public ICollection<MovieComment> Comments { get; set; }
 
     }
 }
