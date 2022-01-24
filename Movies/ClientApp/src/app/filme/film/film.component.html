@@ -1,6 +1,6 @@
 <ng-container *ngIf="movie !== null else loading">
   <h1>Titlu: {{movie.title}}</h1>
-  <h1>An: {{movie.year}}</h1>
+  <h1>An: {{movie.year | formatAn}}</h1>
   <h1>
     Genul:
     <ng-container *ngFor="let genre of movie.movieGenres; last as eUltimul">
