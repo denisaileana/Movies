@@ -17,8 +17,4 @@ export class FilmeComponent implements OnInit {
   ngOnInit() {
     this.moviesService.getMovies().subscribe(movies => this.movies = movies);
   }
-
-  onView(movie: Movie) {
-    this.router.navigate(['/filme', movie.id]).then();
-  }
 }
