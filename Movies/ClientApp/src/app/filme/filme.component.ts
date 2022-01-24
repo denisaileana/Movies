@@ -9,12 +9,27 @@ import {Router} from '@angular/router';
 })
 export class FilmeComponent implements OnInit {
   movies: Movie[] = [];
+  moviesFiltered: Movie[] = [];
+  filtru = 'alba';
+
 
   constructor(private moviesService: MoviesService, private router: Router) {
 
   }
 
   ngOnInit() {
-    this.moviesService.getMovies().subscribe(movies => this.movies = movies);
+    this.moviesService.getMovies().subscribe(movies => {
+       this.movies = movies;
+       this.filtreaza();
+    });
+  }
+
+  doFilter(filtru: string) {
+    this.filtru = filtru;
+    this.filtreaza();
+  }
+
+  private filtreaza() {
+    this.moviesFiltered = this.movies.filter(m => m.title.toLowerCase().includes(this.filtru.toLowerCase()));
   }
 }
