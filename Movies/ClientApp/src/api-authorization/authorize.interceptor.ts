@@ -32,7 +32,7 @@ export class AuthorizeInterceptor implements HttpInterceptor {
 
   private isSameOriginUrl(req: any) {
     // It's an absolute url with the same origin.
-    if (req.url.startsWith(`${window.location.origin}/`)) {
+    if (req.url.startsWith(`/`)) {
       return true;
     }
 

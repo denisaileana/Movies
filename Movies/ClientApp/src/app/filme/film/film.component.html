@@ -1,0 +1,21 @@
+<ng-container *ngIf="movie !== null else loading">
+  <h1>Titlu: {{movie.title}}</h1>
+  <h1>An: {{movie.year}}</h1>
+  <h1>
+    Genul:
+    <ng-container *ngFor="let genre of movie.movieGenres; last as eUltimul">
+      {{genre.genre.numeGen}}
+      <ng-container *ngIf="!eUltimul">,</ng-container>
+    </ng-container>
+  </h1>
+  <h1>Descriere: {{movie.details.description}}</h1>
+  <h1>Comentarii</h1>
+  <ul>
+    <li *ngFor="let comentariu of movie.comments">
+      <strong>{{comentariu.numePersoana}}</strong> - {{comentariu.comentariu}}
+    </li>
+  </ul>
+</ng-container>
+<ng-template #loading>
+  Se incarca datele...
+</ng-template>

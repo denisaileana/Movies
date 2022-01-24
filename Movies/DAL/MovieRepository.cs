@@ -68,7 +68,11 @@ namespace Movies.DAL
 
         public Movie GetMovieById(int movieId)
         {
-            return _dbContext.Movies.Find(movieId);
+            return _dbContext.Movies
+                .Include(x => x.MovieGenres).ThenInclude(x => x.Genre)
+                .Include(x => x.Details)
+                .Include(x => x.Comments)
+                .Single(x => x.Id == movieId);
         }
 
         public IEnumerable<Movie> GetMovies()

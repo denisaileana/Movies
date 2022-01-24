@@ -1,0 +1,14 @@
+<table class="table table-hover">
+  <thead>
+  <tr>
+    <th>Titlu</th>
+    <th>An</th>
+  </tr>
+  </thead>
+  <tbody>
+  <tr *ngFor="let movie of movies" style="cursor:pointer" (click)="onView(movie)">
+    <td>{{movie.title}}</td>
+    <td>{{movie.year}}</td>
+  </tr>
+  </tbody>
+</table>
