@@ -17,5 +17,10 @@ namespace Movies.Data
             IOptions<OperationalStoreOptions> operationalStoreOptions) : base(options, operationalStoreOptions)
         {
         }
+
+        public DbSet<Movie> Movies { get; set; }
+
+        public DbSet<MovieDetails> MovieDetails { get; set; }
+
     }
 }
